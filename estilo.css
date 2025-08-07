@@ -1,0 +1,14 @@
+.completed {
+  text-decoration: line-through;
+  background-color: #d4edda !important;
+  transition: background-color 0.3s ease;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
