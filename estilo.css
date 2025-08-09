@@ -304,3 +304,47 @@
         .task-card.removing {
             animation: slideOut 0.5s ease;
         }
+
+
+        
+        /* === RESPONSIVIDADE === */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .controls-section {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .task-card {
+                padding: 15px;
+            }
+            
+            .task-actions {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            body {
+                padding: 10px;
+            }
+            
+            .main-container {
+                margin: 0 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+  
