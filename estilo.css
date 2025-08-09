@@ -322,10 +322,19 @@ body.dark-mode .controls-section {
 body.dark-mode .form-section {
     background: rgba(50, 50, 70, 0.6);
     border-left-color: #8b7cf6;
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-title {
+    color: #e0e0e0;
 }
 
 body.dark-mode .task-card {
     background: rgba(60, 60, 80, 0.8);
+    color: #e0e0e0;
+}
+
+body.dark-mode .task-title {
     color: #e0e0e0;
 }
 
@@ -335,9 +344,14 @@ body.dark-mode .form-control {
     color: #e0e0e0;
 }
 
+body.dark-mode .form-control::placeholder {
+    color: #a0a0a0;
+}
+
 body.dark-mode .form-control:focus {
     border-color: #8b7cf6;
     background: rgba(80, 80, 100, 0.9);
+    color: #e0e0e0;
 }
 
 body.dark-mode .task-date {
@@ -345,28 +359,34 @@ body.dark-mode .task-date {
     color: #c0c0c0;
 }
 
-
-
-/* === RODAPÉ === */
-.footer {
-    background: linear-gradient(135deg, #4facfe3d 0%, #00f1fe91 100%);
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    margin-top: 20px;
+body.dark-mode h5 {
+    color: #e0e0e0;
 }
 
-.footer p {
-    margin: 0;
-    font-size: 0.95rem;
-    font-weight: 500;
-    opacity: 0.9;
+body.dark-mode .empty-state {
+    color: #a0a0a0;
 }
 
-.footer .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 10px;
+body.dark-mode .empty-state h3 {
+    color: #c0c0c0;
+}
+
+body.dark-mode .stats-section {
+    background: rgba(40, 40, 60, 0.8);
+}
+
+body.dark-mode .stat-card {
+    background: rgba(50, 50, 70, 0.8);
+    color: #e0e0e0;
+}
+
+body.dark-mode .stat-label {
+    color: #a0a0a0;
+}
+
+body.dark-mode .footer {
+    background: linear-gradient(135deg, #2a2a4e3d 0%, #1a3a5e91 100%);
+    color: #e0e0e0;
 }
 
 /* === RESPONSIVIDADE === */
@@ -408,4 +428,26 @@ body.dark-mode .task-date {
     .header h1 {
         font-size: 1.8rem;
     }
+}
+
+/* === RODAPÉ === */
+.footer {
+    background: linear-gradient(135deg, #4facfe3d 0%, #00f1fe91 100%);
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    margin-top: 20px;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.footer .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 10px;
 }

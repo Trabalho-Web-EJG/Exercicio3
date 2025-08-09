@@ -641,16 +641,16 @@ function toggleDarkMode() {
     );
 }
 
-// Ativa modo escuro se foi salvo anteriormente
+//  modo escuro 
 if (darkModeEnabled) {
     document.body.classList.add('dark-mode');
 }
 
-// Konami Code para ativar modo escuro: ↑↑↓↓←→←→BA
+// ativando modo escuro: ←→BA
 let konamiCode = [];
 const konamiSequence = [
-    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+    
+    'ArrowLeft', 'ArrowRight',
     'KeyB', 'KeyA'
 ];
 
