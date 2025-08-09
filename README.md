@@ -38,7 +38,7 @@ organizador-tarefas/
 
 ## 🎮 Easter Egg
 
-Digite a sequência Konami Code (↑↑↓↓←→←→BA) para ativar o modo escuro!
+Digite a sequência Konami Code (←→BA) para ativar o modo escuro!
 
 ## 📱 Responsividade
 
