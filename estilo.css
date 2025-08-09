@@ -432,7 +432,7 @@ body.dark-mode .footer {
 
 /* === RODAPÉ === */
 .footer {
-    background: linear-gradient(135deg, #4facfe3d 0%, #00f1fe91 100%);
+    background: linear-gradient(135deg, #619bd6c4 0%, #00f1fecb 500%);
     color: white;
     text-align: center;
     padding: 5px 0;
