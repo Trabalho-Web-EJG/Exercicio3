@@ -646,7 +646,7 @@ if (darkModeEnabled) {
     document.body.classList.add('dark-mode');
 }
 
-// ativando modo escuro: ←→BA
+// ativando modo escuro: ←→BA konamicode
 let konamiCode = [];
 const konamiSequence = [
     
