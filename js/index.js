@@ -225,7 +225,7 @@ function showAlert(message, type) {
         if (alert && alert.parentNode) {
             alert.remove();
         }
-    }, 3000);
+    }, 7000);
 }
 
 /**
