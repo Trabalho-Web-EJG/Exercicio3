@@ -225,7 +225,7 @@ function showAlert(message, type) {
         if (alert && alert.parentNode) {
             alert.remove();
         }
-    }, 7000);
+    }, 3000);
 }
 
 /**
@@ -578,6 +578,7 @@ function checkUrgentTasks() {
         `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
         'warning'
     );
+ }
 }
 
 /**
