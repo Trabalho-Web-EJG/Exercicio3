@@ -572,6 +572,15 @@ function checkUrgentTasks() {
         !task.completed && isTaskUrgent(task.date)
     );
 
+// Mostrar a mensagem de alerta a cada 5 minutos
+    if (urgentTasks.length > 0) {
+    showAlert(
+        `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
+        'warning'
+    );
+}
+
+/**
     if (urgentTasks.length > 0) {
         // Só notifica uma vez por sessão para não ser invasivo
         const notifiedToday = sessionStorage.getItem('urgentNotified');
@@ -586,6 +595,8 @@ function checkUrgentTasks() {
         }
     }
 }
+*/
+
 
 // Verifica tarefas urgentes a cada 5 minutos
 setInterval(checkUrgentTasks, 5 * 60 * 1000);
