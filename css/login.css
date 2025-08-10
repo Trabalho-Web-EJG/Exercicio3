@@ -50,10 +50,10 @@ body {
     75% { transform: translateX(5px); }
 }
 
-/* === CABEÇALHO === */
+/* === CABEÇALHO Login === */
 .login-header {
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    padding: 40px 30px;
+    padding: 30px 20px;
     text-align: center;
     color: white;
 }
@@ -72,7 +72,7 @@ body {
 
 /* === CORPO DO LOGIN === */
 .login-body {
-    padding: 40px 30px;
+    padding: 20px 20px;
 }
 
 .welcome-text {
@@ -96,6 +96,7 @@ body {
 /* === FORMULÁRIO === */
 .form-group {
     margin-bottom: 20px;
+  
 }
 
 .form-group label {
@@ -142,8 +143,9 @@ body {
 /* === BOTÃO DE LOGIN === */
 .btn-login {
     width: 100%;
+    box-shadow: 2px 3px 10px #3a5ab3d5;
     background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    border: none;
+    border: solid ;
     border-radius: 10px;
     padding: 12px;
     font-size: 1.1rem;
@@ -170,6 +172,7 @@ body {
 
 /* === ÁREA DE INFORMAÇÕES === */
 .login-info {
+
     background: #f8f9ff;
     border-radius: 10px;
     padding: 20px;
@@ -178,6 +181,7 @@ body {
 }
 
 .login-info h6 {
+
     color: #4facfe;
     font-weight: 600;
     margin-bottom: 10px;
@@ -195,6 +199,7 @@ body {
 
 /* === RODAPÉ === */
 .footer-text {
+  background: linear-gradient(135deg, #4facfe31 0%, #00f1fe2f 100%);
     text-align: center;
     margin-top: 30px;
     color: #666;
