@@ -1,4 +1,4 @@
-# 📋 Organizador de Tarefas da Sala
+# 📋 Organizador de Tarefas 
 
 Sistema web para organizar atividades e prazos escolares, desenvolvido como projeto acadêmico.
 
