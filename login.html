@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Organizador de Tarefas</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="login-style.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Cabeçalho -->
+        <div class="login-header">
+            <h1><i class="bi bi-person-circle"></i> Login</h1>
+            <p>Organizador de Tarefas Escolares</p>
+        </div>
+
+        <!-- Corpo do Login -->
+        <div class="login-body">
+            <div class="welcome-text">
+                <h2>Bem-vindo de volta!</h2>
+                <p>Entre com suas credenciais para acessar suas tarefas</p>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <div class="input-group">
+                        <i class="bi bi-person"></i>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="username" 
+                            placeholder="Digite seu nome de usuário" 
+                            required
+                        >
+                    </div>
+                    <div class="error-message" id="usernameError">Por favor, digite um nome de usuário</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-group">
+                        <i class="bi bi-lock"></i>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password" 
+                            placeholder="Digite sua senha" 
+                            required
+                        >
+                    </div>
+                    <div class="error-message" id="passwordError">Por favor, digite uma senha</div>
+                </div>
+
+                <button type="submit" class="btn btn-login">
+                    <i class="bi bi-box-arrow-in-right"></i> Entrar
+                </button>
+            </form>
+
+            <!-- Informações para o usuário -->
+            <div class="login-info">
+                <h6><i class="bi bi-info-circle"></i> Para este projeto escolar:</h6>
+                <p>
+                    Digite qualquer nome de usuário e senha para acessar o sistema. 
+                    Suas tarefas serão salvas localmente no seu navegador.
+                </p>
+            </div>
+
+            <div class="footer-text">
+                &copy; 2024 Elessando de Abreu&reg;. Projeto Escolar
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Personalizado -->
+    <script src="login-script.js"></script>
+</body>
+</html>
