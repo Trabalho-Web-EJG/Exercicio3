@@ -63,6 +63,7 @@ function setupEventListeners() {
 function createSampleTasks() {
     if (tasks.length === 0) {
         const sampleTasks = [
+            
             {
                 id: generateId(),
                 title: "Entregar trabalho de História sobre Segunda Guerra Mundial",
@@ -82,6 +83,13 @@ function createSampleTasks() {
                 title: "Apresentar seminário de Biologia sobre Ecossistemas",
                 date: getDatePlusDays(10),
                 completed: true,
+                createdAt: new Date().toISOString()
+            },
+            {
+                id: generateId(),
+                title: "Entregar trabalho WEB - Matheus - Trier",
+                date: getDatePlusDays(4),
+                completed: false,
                 createdAt: new Date().toISOString()
             },
             {
