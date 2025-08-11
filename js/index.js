@@ -57,13 +57,12 @@ function setupEventListeners() {
 }
 
 /**
- * Cria 5 tarefas fictícias para demonstração
+ * Cria 6 tarefas fictícias para demonstração
  * Apenas se não houver tarefas já salvas
  */
 function createSampleTasks() {
     if (tasks.length === 0) {
         const sampleTasks = [
-            
             {
                 id: generateId(),
                 title: "Entregar trabalho de História sobre Segunda Guerra Mundial",
@@ -95,7 +94,7 @@ function createSampleTasks() {
             {
                 id: generateId(),
                 title: "Fazer exercícios de Português - páginas 45 a 50",
-                date: getDatePlusDays(2),
+                date: getDatePlusDays(3),
                 completed: false,
                 createdAt: new Date().toISOString()
             },
@@ -220,17 +219,16 @@ function showAlert(message, type) {
     const controlsSection = document.querySelector('.controls-section');
     controlsSection.insertBefore(alert, controlsSection.firstChild);
 
-    // Remove automaticamente após 3 segundos
+    // Remove automaticamente após 10 segundos
     setTimeout(() => {
         if (alert && alert.parentNode) {
             alert.remove();
         }
-    }, 3000);
+    }, 10000);
 }
 
 /**
  * Salva as tarefas no localStorage
- * NOTA: No ambiente Claude.ai isso não funcionará, mas funciona em ambiente real
  */
 function saveTasks() {
     try {
@@ -499,71 +497,6 @@ function animateCounter(element, start, end) {
 }
 
 /**
- * === FUNÇÕES UTILITÁRIAS ADICIONAIS ===
- */
-
-/**
- * Exporta as tarefas para um arquivo JSON (funcionalidade extra)
- */
-function exportTasks() {
-    const dataStr = JSON.stringify(tasks, null, 2);
-    const dataBlob = new Blob([dataStr], {type: 'application/json'});
-    
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(dataBlob);
-    link.download = 'tarefas_escolares.json';
-    link.click();
-}
-
-/**
- * Limpa todas as tarefas concluídas
- */
-function clearCompleted() {
-    if (!confirm('Tem certeza que deseja remover todas as tarefas concluídas?')) {
-        return;
-    }
-
-    const completedCount = tasks.filter(task => task.completed).length;
-    
-    if (completedCount === 0) {
-        showAlert('Não há tarefas concluídas para remover!', 'info');
-        return;
-    }
-
-    tasks = tasks.filter(task => !task.completed);
-    saveTasks();
-    renderTasks();
-    updateStats();
-    
-    showAlert(`${completedCount} tarefa(s) concluída(s) removida(s)!`, 'success');
-}
-
-/**
- * Obtém estatísticas detalhadas das tarefas
- * @returns {Object} - Objeto com estatísticas
- */
-function getTaskStats() {
-    const now = new Date();
-    const urgent = tasks.filter(task => 
-        !task.completed && isTaskUrgent(task.date)
-    ).length;
-    
-    const overdue = tasks.filter(task => {
-        if (task.completed) return false;
-        const taskDate = new Date(task.date);
-        return taskDate < now;
-    }).length;
-
-    return {
-        total: tasks.length,
-        pending: tasks.filter(task => !task.completed).length,
-        completed: tasks.filter(task => task.completed).length,
-        urgent: urgent,
-        overdue: overdue
-    };
-}
-
-/**
  * === SISTEMA DE NOTIFICAÇÕES PARA TAREFAS URGENTES ===
  * Verifica periodicamente se há tarefas urgentes
  */
@@ -572,133 +505,19 @@ function checkUrgentTasks() {
         !task.completed && isTaskUrgent(task.date)
     );
 
-// Mostrar a mensagem de alerta a cada 5 minutos
+    // Mostrar a mensagem de alerta a cada 5 minutos
     if (urgentTasks.length > 0) {
-    showAlert(
-        `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
-        'warning'
-    );
- }
-}
-
-/**
-    if (urgentTasks.length > 0) {
-        // Só notifica uma vez por sessão para não ser invasivo
-        const notifiedToday = sessionStorage.getItem('urgentNotified');
-        const today = new Date().toDateString();
-        
-        if (notifiedToday !== today) {
-            showAlert(
-                `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
-                'warning'
-            );
-            sessionStorage.setItem('urgentNotified', today);
-        }
+        showAlert(
+            `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
+            'warning'
+        );
     }
 }
-*/
-
 
 // Verifica tarefas urgentes a cada 5 minutos
 setInterval(checkUrgentTasks, 5 * 60 * 1000);
-// Verifica imediatamente quando a página carrega (após 3 segundos)
-setTimeout(checkUrgentTasks, 3000);
+// Verifica imediatamente quando a página carrega (após 2 segundos)
+setTimeout(checkUrgentTasks, 2000);
 
-/**
- * === ANÁLISE DE PRODUTIVIDADE ===
- * Calcula métricas de produtividade do usuário
- */
-function getProductivityAnalysis() {
-    if (tasks.length === 0) return null;
-
-    const completedTasks = tasks.filter(task => task.completed);
-    const completionRate = (completedTasks.length / tasks.length) * 100;
-    
-    // Calcula tarefas concluídas na última semana
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-    
-    const recentCompletions = completedTasks.filter(task => {
-        const completedDate = new Date(task.createdAt);
-        return completedDate >= oneWeekAgo;
-    }).length;
-
-    return {
-        completionRate: Math.round(completionRate),
-        recentCompletions: recentCompletions,
-        totalCompleted: completedTasks.length,
-        averagePerWeek: Math.round(recentCompletions)
-    };
-}
-
-/**
- * === LOG DE DESENVOLVIMENTO ===
- * Registra ações para debug (apenas em ambiente de desenvolvimento)
- */
-function logAction(action, details = {}) {
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log(`[Organizador de Tarefas] ${action}:`, details);
-    }
-}
-
-// Registra carregamento inicial
-logAction('Sistema inicializado', { tasksCount: tasks.length });
-
-/**
- * === EASTER EGG: MODO NOTURNO ===
- * Permite alternar entre tema claro e escuro
- */
-let darkModeEnabled = localStorage.getItem('darkMode') === 'true';
-
-function toggleDarkMode() {
-    darkModeEnabled = !darkModeEnabled;
-    document.body.classList.toggle('dark-mode', darkModeEnabled);
-    localStorage.setItem('darkMode', darkModeEnabled);
-    
-    showAlert(
-        darkModeEnabled ? 'Modo noturno ativado!' : 'Modo claro ativado!', 
-        'info'
-    );
-}
-
-//  modo escuro 
-if (darkModeEnabled) {
-    document.body.classList.add('dark-mode');
-}
-
-// ativando modo escuro: ←→BA konamicode
-let konamiCode = [];
-const konamiSequence = [
-    
-    'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
-
-document.addEventListener('keydown', function(e) {
-    konamiCode.push(e.code);
-    konamiCode = konamiCode.slice(-konamiSequence.length);
-    
-    if (konamiCode.join(',') === konamiSequence.join(',')) {
-        toggleDarkMode();
-        konamiCode = [];
-    }
-});
-
-/**
- * === FUNÇÃO FINAL DE LIMPEZA ===
- * Executada quando a página é fechada (para estatísticas)
- */
-window.addEventListener('beforeunload', function() {
-    // Salva timestamp da última sessão
-    localStorage.setItem('lastSession', new Date().toISOString());
-    
-    // Log da sessão (apenas em desenvolvimento)
-    logAction('Sessão finalizada', {
-        tasksCount: tasks.length,
-        completedInSession: tasks.filter(task => task.completed).length,
-        sessionDuration: 'N/A'
-    });
-});
-
-// === FIM DO SISTEMA ===
+// === INICIALIZAÇÃO FINAL ===
 console.log('✅ Organizador de Tarefas da Sala - Sistema carregado com sucesso!');
