@@ -1,20 +1,16 @@
-/**
- * === ORGANIZADOR DE TAREFAS DA SALA ===
- * Sistema para gerenciar atividades e prazos escolares
- * Desenvolvido com HTML5, CSS3, Bootstrap e JavaScript
- */
 
-// === VARIÁVEIS GLOBAIS ===
-let tasks = []; // Array para armazenar todas as tarefas
-let currentFilter = 'all'; // Filtro atual ativo
 
-// === VARIÁVEIS PARA MODO ESCURO E KONAMI CODE ===
+
+let tasks = []; // Array tarefas
+let currentFilter = 'all'; // Filtro tudo
+
+// === Teclas KONAMI CODE ===
 const konamiCode = ['ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
 
 let konamiSequence = [];
 let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
-// === ELEMENTOS DO DOM ===
+// === Elementos Dom ===
 const taskForm = document.getElementById('taskForm');
 const taskInput = document.getElementById('taskInput');
 const dateInput = document.getElementById('dateInput');
@@ -28,24 +24,20 @@ const pendingTasksElement = document.getElementById('pendingTasks');
 const completedTasksElement = document.getElementById('completedTasks');
 
 /**
- * === INICIALIZAÇÃO DO SISTEMA ===
  * Carrega as tarefas e configura os eventos quando a página carrega
  */
-document.addEventListener('DOMContentLoaded', function() {
-    loadTasks(); // Carrega tarefas do localStorage
-    setMinDate(); // Define data mínima como hoje
+document.addEventListener('DOMContentLoaded', function () {
+    loadTasks(); // Carregar tarefas do localStorage
+    setMinDate(); // Data mínima como hoje
     setupEventListeners(); // Configura eventos
-    createSampleTasks(); // Cria tarefas fictícias se não existirem
-    initializeDarkMode(); // Inicializa modo escuro
+    createSampleTasks(); // Cria tarefas fictícias caso não existam 
+    initializeDarkMode();
     setupKonamiCode(); // Configura Konami Code
 });
 
-/**
- * === SISTEMA DE MODO ESCURO E KONAMI CODE ===
- */
 
 /**
- * Inicializa o modo escuro se estiver salvo
+ * Modo escuro inicia se ja estiver salvo
  */
 function initializeDarkMode() {
     if (isDarkMode) {
@@ -54,19 +46,19 @@ function initializeDarkMode() {
 }
 
 /**
- * Configura o sistema do Konami Code
+ * Configuração do sistema Konami Code
  */
 function setupKonamiCode() {
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         // Adicionar a tecla pressionada à sequência
         konamiSequence.push(event.code);
-        
+
         // Manter apenas os últimos 10 elementos (tamanho do Konami Code)
         if (konamiSequence.length > konamiCode.length) {
             konamiSequence.shift();
         }
-        
-        // Verificar se a sequência atual corresponde ao Konami Code
+
+        // Verificar se a sequência de teclas corresponde ao Konami Code
         if (konamiSequence.length === konamiCode.length) {
             let isMatch = true;
             for (let i = 0; i < konamiCode.length; i++) {
@@ -75,7 +67,7 @@ function setupKonamiCode() {
                     break;
                 }
             }
-            
+
             if (isMatch) {
                 toggleDarkMode();
                 konamiSequence = []; // Resetar a sequência
@@ -85,26 +77,26 @@ function setupKonamiCode() {
 }
 
 /**
- * Alterna entre modo escuro e claro
+ * Alterna entre claro e escuro
  */
 function toggleDarkMode() {
     isDarkMode = !isDarkMode;
     document.body.classList.toggle('dark-mode', isDarkMode);
-    
+
     // Salva a preferência
     try {
         localStorage.setItem('darkMode', isDarkMode);
     } catch (error) {
         console.warn('Não foi possível salvar a preferência do modo escuro');
     }
-    
-    // Feedback visual
-    const message = isDarkMode ? 
-        '🌙 Modo escuro ativado! Konami Code detectado!' : 
+
+    // Tela visual do Feedback  
+    const message = isDarkMode ?
+        '🌙 Modo escuro ativado! Konami Code detectado!' :
         '☀️ Modo claro ativado! Konami Code detectado!';
-    
+
     showAlert(message, 'info');
-    
+
     // Adiciona efeito visual especial
     createKonamiEffect();
 }
@@ -121,16 +113,16 @@ function createKonamiEffect() {
         left: 0;
         width: 100%;
         height: 100%;
-        background: ${isDarkMode ? 
-            'radial-gradient(circle, rgba(108,99,255,0.3) 0%, transparent 70%)' : 
+        background: ${isDarkMode ?
+            'radial-gradient(circle, rgba(108,99,255,0.3) 0%, transparent 70%)' :
             'radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%)'
         };
         pointer-events: none;
         z-index: 9999;
         animation: konamiPulse 1s ease-out;
     `;
-    
-    // Adicionar animação CSS
+
+    //  Animação CSS
     const style = document.createElement('style');
     style.textContent = `
         @keyframes konamiPulse {
@@ -140,9 +132,9 @@ function createKonamiEffect() {
         }
     `;
     document.head.appendChild(style);
-    
+
     document.body.appendChild(effect);
-    
+
     // Remover após a animação
     setTimeout(() => {
         if (effect.parentNode) {
@@ -155,7 +147,7 @@ function createKonamiEffect() {
 }
 
 /**
- * Define a data mínima no input como a data atual
+ * Limita a data para a data atual hoje
  */
 function setMinDate() {
     const today = new Date().toISOString().split('T')[0];
@@ -172,16 +164,15 @@ function setupEventListeners() {
 
     // Eventos dos botões de filtro
     filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             setActiveFilter(button.dataset.filter);
         });
     });
 }
 
 /**
- * Cria 6 tarefas fictícias para demonstração
- * Apenas se não houver tarefas já salvas
- */
+ *6 tarefas fictícias para demonstração, caso não haja tarefas salvas
+  */
 function createSampleTasks() {
     if (tasks.length === 0) {
         const sampleTasks = [
@@ -195,7 +186,7 @@ function createSampleTasks() {
             {
                 id: generateId(),
                 title: "Estudar para prova de Matemática - Geometria",
-                date: getDatePlusDays(3),
+                date: getDatePlusDays(2),
                 completed: false,
                 createdAt: new Date().toISOString()
             },
@@ -216,7 +207,7 @@ function createSampleTasks() {
             {
                 id: generateId(),
                 title: "Fazer exercícios de Português - páginas 45 a 50",
-                date: getDatePlusDays(3),
+                date: getDatePlusDays(1),
                 completed: false,
                 createdAt: new Date().toISOString()
             },
@@ -257,11 +248,11 @@ function generateId() {
 
 /**
  * Manipula o envio do formulário de nova tarefa
- * @param {Event} e - Evento de submit
+ * @param {Event} e 
  */
 function handleSubmit(e) {
     e.preventDefault(); // Previne o reload da página
-    
+
     const title = taskInput.value.trim();
     const date = dateInput.value;
 
@@ -271,8 +262,13 @@ function handleSubmit(e) {
         return;
     }
 
-    // Verifica se a data não é no passado
-    if (new Date(date) < new Date().setHours(0,0,0,0)) {
+    // Verifica se a data não é no passado e é hoje ate meia noite
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const taskDate = new Date(date);
+
+    if (new Date < today) {
         showAlert('A data deve ser hoje ou no futuro!', 'warning');
         return;
     }
@@ -311,8 +307,8 @@ function handleSubmit(e) {
  * @returns {boolean} - True se a tarefa já existe
  */
 function taskExists(title) {
-    return tasks.some(task => 
-        task.title.toLowerCase() === title.toLowerCase() && 
+    return tasks.some(task =>
+        task.title.toLowerCase() === title.toLowerCase() &&
         !task.completed
     );
 }
@@ -382,7 +378,7 @@ function loadTasks() {
  */
 function renderTasks() {
     const filteredTasks = getFilteredTasks();
-    
+
     // Se não há tarefas para mostrar, exibe estado vazio
     if (filteredTasks.length === 0) {
         tasksList.innerHTML = '';
@@ -392,10 +388,10 @@ function renderTasks() {
 
     // Esconde estado vazio e renderiza tarefas
     emptyState.style.display = 'none';
-    
+
     // Ordena tarefas por data
     const sortedTasks = filteredTasks.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
+
     // Cria HTML para cada tarefa
     tasksList.innerHTML = sortedTasks.map(task => createTaskHTML(task)).join('');
 }
@@ -423,7 +419,7 @@ function getFilteredTasks() {
 function createTaskHTML(task) {
     const isUrgent = isTaskUrgent(task.date);
     const isNear = isTaskNear(task.date);
-    
+
     let dateClass = '';
     if (isUrgent && !task.completed) {
         dateClass = 'urgent';
@@ -432,7 +428,7 @@ function createTaskHTML(task) {
     }
 
     const formattedDate = formatDate(task.date);
-    
+
     return `
         <div class="task-card ${task.completed ? 'completed' : ''}" data-task-id="${task.id}">
             <div class="task-header">
@@ -518,18 +514,18 @@ function escapeHtml(text) {
  */
 function toggleTask(taskId) {
     const taskIndex = tasks.findIndex(task => task.id === taskId);
-    
+
     if (taskIndex !== -1) {
         tasks[taskIndex].completed = !tasks[taskIndex].completed;
         saveTasks();
         renderTasks();
         updateStats();
 
-        const message = tasks[taskIndex].completed ? 
-            'Tarefa concluída! Parabéns!' : 
+        const message = tasks[taskIndex].completed ?
+            'Tarefa concluída! Parabéns!' :
             'Tarefa reaberta!';
         const type = tasks[taskIndex].completed ? 'success' : 'info';
-        
+
         showAlert(message, type);
     }
 }
@@ -545,18 +541,18 @@ function deleteTask(taskId) {
     }
 
     const taskElement = document.querySelector(`[data-task-id="${taskId}"]`);
-    
+
     // Animação de remoção
     if (taskElement) {
         taskElement.classList.add('removing');
-        
+
         setTimeout(() => {
             // Remove do array
             tasks = tasks.filter(task => task.id !== taskId);
             saveTasks();
             renderTasks();
             updateStats();
-            
+
             showAlert('Tarefa excluída com sucesso!', 'info');
         }, 500);
     }
@@ -568,7 +564,7 @@ function deleteTask(taskId) {
  */
 function setActiveFilter(filter) {
     currentFilter = filter;
-    
+
     // Atualiza botões de filtro
     filterButtons.forEach(btn => {
         btn.classList.remove('active');
@@ -576,7 +572,7 @@ function setActiveFilter(filter) {
             btn.classList.add('active');
         }
     });
-    
+
     // Re-renderiza as tarefas
     renderTasks();
 }
@@ -608,12 +604,12 @@ function animateCounter(element, start, end) {
 
     const timer = setInterval(() => {
         current += increment;
-        
+
         if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
             current = end;
             clearInterval(timer);
         }
-        
+
         element.textContent = Math.round(current);
     }, 16);
 }
@@ -623,14 +619,14 @@ function animateCounter(element, start, end) {
  * Verifica periodicamente se há tarefas urgentes
  */
 function checkUrgentTasks() {
-    const urgentTasks = tasks.filter(task => 
+    const urgentTasks = tasks.filter(task =>
         !task.completed && isTaskUrgent(task.date)
     );
 
     // Mostrar a mensagem de alerta a cada 5 minutos
     if (urgentTasks.length > 0) {
         showAlert(
-            `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`, 
+            `Atenção! Você tem ${urgentTasks.length} tarefa(s) urgente(s) para concluir hoje!`,
             'warning'
         );
     }
