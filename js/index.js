@@ -273,13 +273,13 @@ function handleSubmit(e) {
         return;
     }
 
-    // Verifica se a tarefa já existe
+    //  Tarefa seja duplicada
     if (taskExists(title)) {
         showAlert('Esta tarefa já foi adicionada!', 'warning');
         return;
     }
 
-    // Cria nova tarefa
+    // Criação de nova tarefa
     const newTask = {
         id: generateId(),
         title: title,
@@ -288,13 +288,13 @@ function handleSubmit(e) {
         createdAt: new Date().toISOString()
     };
 
-    // Adiciona ao array e salva
+    // Add  ao array e salva
     tasks.push(newTask);
     saveTasks();
     renderTasks();
     updateStats();
 
-    // Limpa o formulário
+    // Limpa formulário
     taskForm.reset();
     setMinDate(); // Restaura data mínima
 
@@ -342,11 +342,11 @@ function showAlert(message, type) {
         if (alert && alert.parentNode) {
             alert.remove();
         }
-    }, 10000);
+    }, 80000);
 }
 
 /**
- * Salva as tarefas no localStorage
+ * Salvar as tarefas no localStorage
  */
 function saveTasks() {
     try {
@@ -356,9 +356,9 @@ function saveTasks() {
     }
 }
 
-/**
- * Carrega as tarefas do localStorage
- */
+
+ //Carrega as tarefas do localStorage
+ 
 function loadTasks() {
     try {
         const savedTasks = localStorage.getItem('schoolTasks');
@@ -373,9 +373,9 @@ function loadTasks() {
     }
 }
 
-/**
- * Renderiza todas as tarefas na tela baseado no filtro atual
- */
+
+ // Renderiza todas as tarefas na tela pelo filtro
+ 
 function renderTasks() {
     const filteredTasks = getFilteredTasks();
 
@@ -389,7 +389,7 @@ function renderTasks() {
     // Esconde estado vazio e renderiza tarefas
     emptyState.style.display = 'none';
 
-    // Ordena tarefas por data
+    // Lista as tarefas por data
     const sortedTasks = filteredTasks.sort((a, b) => new Date(a.date) - new Date(b.date));
 
     // Cria HTML para cada tarefa
@@ -484,7 +484,7 @@ function isTaskNear(dateStr) {
 }
 
 /**
- * Formata uma data para exibição
+ * Formata a data para exibir
  * @param {string} dateStr - Data no formato YYYY-MM-DD
  * @returns {string} - Data formatada
  */
