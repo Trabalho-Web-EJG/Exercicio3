@@ -9,10 +9,7 @@ let tasks = []; // Array para armazenar todas as tarefas
 let currentFilter = 'all'; // Filtro atual ativo
 
 // === VARIÁVEIS PARA MODO ESCURO E KONAMI CODE ===
-const konamiCode = [
-    'ArrowLeft', 'ArrowRight',
-    'KeyB', 'KeyA'
-];
+const konamiCode = ['ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
 
 let konamiSequence = [];
 let isDarkMode = localStorage.getItem('darkMode') === 'true';
