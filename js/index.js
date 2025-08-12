@@ -8,6 +8,15 @@
 let tasks = []; // Array para armazenar todas as tarefas
 let currentFilter = 'all'; // Filtro atual ativo
 
+// === VARIÁVEIS PARA MODO ESCURO E KONAMI CODE ===
+const konamiCode = [
+    'ArrowLeft', 'ArrowRight',
+    'KeyB', 'KeyA'
+];
+
+let konamiSequence = [];
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
 // === ELEMENTOS DO DOM ===
 const taskForm = document.getElementById('taskForm');
 const taskInput = document.getElementById('taskInput');
@@ -30,7 +39,123 @@ document.addEventListener('DOMContentLoaded', function() {
     setMinDate(); // Define data mínima como hoje
     setupEventListeners(); // Configura eventos
     createSampleTasks(); // Cria tarefas fictícias se não existirem
+    initializeDarkMode(); // Inicializa modo escuro
+    setupKonamiCode(); // Configura Konami Code
 });
+
+/**
+ * === SISTEMA DE MODO ESCURO E KONAMI CODE ===
+ */
+
+/**
+ * Inicializa o modo escuro se estiver salvo
+ */
+function initializeDarkMode() {
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+/**
+ * Configura o sistema do Konami Code
+ */
+function setupKonamiCode() {
+    document.addEventListener('keydown', function(event) {
+        // Adicionar a tecla pressionada à sequência
+        konamiSequence.push(event.code);
+        
+        // Manter apenas os últimos 10 elementos (tamanho do Konami Code)
+        if (konamiSequence.length > konamiCode.length) {
+            konamiSequence.shift();
+        }
+        
+        // Verificar se a sequência atual corresponde ao Konami Code
+        if (konamiSequence.length === konamiCode.length) {
+            let isMatch = true;
+            for (let i = 0; i < konamiCode.length; i++) {
+                if (konamiSequence[i] !== konamiCode[i]) {
+                    isMatch = false;
+                    break;
+                }
+            }
+            
+            if (isMatch) {
+                toggleDarkMode();
+                konamiSequence = []; // Resetar a sequência
+            }
+        }
+    });
+}
+
+/**
+ * Alterna entre modo escuro e claro
+ */
+function toggleDarkMode() {
+    isDarkMode = !isDarkMode;
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    
+    // Salva a preferência
+    try {
+        localStorage.setItem('darkMode', isDarkMode);
+    } catch (error) {
+        console.warn('Não foi possível salvar a preferência do modo escuro');
+    }
+    
+    // Feedback visual
+    const message = isDarkMode ? 
+        '🌙 Modo escuro ativado! Konami Code detectado!' : 
+        '☀️ Modo claro ativado! Konami Code detectado!';
+    
+    showAlert(message, 'info');
+    
+    // Adiciona efeito visual especial
+    createKonamiEffect();
+}
+
+/**
+ * Cria um efeito visual especial quando o Konami Code é ativado
+ */
+function createKonamiEffect() {
+    // Criar elemento de efeito
+    const effect = document.createElement('div');
+    effect.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: ${isDarkMode ? 
+            'radial-gradient(circle, rgba(108,99,255,0.3) 0%, transparent 70%)' : 
+            'radial-gradient(circle, rgba(255,215,0,0.3) 0%, transparent 70%)'
+        };
+        pointer-events: none;
+        z-index: 9999;
+        animation: konamiPulse 1s ease-out;
+    `;
+    
+    // Adicionar animação CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes konamiPulse {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    document.body.appendChild(effect);
+    
+    // Remover após a animação
+    setTimeout(() => {
+        if (effect.parentNode) {
+            effect.remove();
+        }
+        if (style.parentNode) {
+            style.remove();
+        }
+    }, 1000);
+}
 
 /**
  * Define a data mínima no input como a data atual
@@ -521,3 +646,4 @@ setTimeout(checkUrgentTasks, 2000);
 
 // === INICIALIZAÇÃO FINAL ===
 console.log('✅ Organizador de Tarefas da Sala - Sistema carregado com sucesso!');
+console.log('🎮 Konami Code ativo: ↑↑↓↓←→←→BA para alternar modo escuro!');
