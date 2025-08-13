@@ -1,79 +1,85 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Organizador de Tarefas</title>
-    
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- Icones do Bootstrap  -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
     <!-- Fontes do Google  -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/login.css">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
     <div class="login-container">
-      
-        <div class="login-header">
-            <h1><i class="bi bi-person-circle"></i> Login</h1>
-            <p>Mantenha suas atividades organizadas e em dia</p>
+      <div class="login-header">
+        <h1><i class="bi bi-person-circle"></i> Login</h1>
+        <p>Mantenha suas atividades organizadas e em dia</p>
+      </div>
+
+      <!-- Corpo  -->
+      <div class="login-body">
+        <div class="welcome-text">
+          <h2>Bem-vindo de volta!</h2>
+          <p>Entre com suas credenciais para acessar suas tarefas</p>
         </div>
 
-        <!-- Corpo  -->
-        <div class="login-body">
-            <div class="welcome-text">
-                <h2>Bem-vindo de volta!</h2>
-                <p>Entre com suas credenciais para acessar suas tarefas</p>
+        <!--  Login -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Usuário</label>
+            <div class="input-group">
+              <i class="bi bi-person"></i>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                placeholder="Digite seu nome de usuário"
+                required
+              />
             </div>
+          </div>
 
-            <!--  Login -->
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Usuário</label>
-                    <div class="input-group">
-                        <i class="bi bi-person"></i>
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="username" 
-                            placeholder="Digite seu nome de usuário" 
-                            required
-                        >
-                    </div>
-                  
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <div class="input-group">
-                        <i class="bi bi-lock"></i>
-                        <input 
-                            type="password" 
-                            class="form-control" 
-                            id="password" 
-                            placeholder="Digite sua senha" 
-                            required
-                        >
-                    </div>
-                    
-                </div>
-
-                <button type="submit" class="btn btn-login">
-                    <i class="bi bi-box-arrow-in-right"></i> Entrar
-                </button>
-            </form>
-            
-            <div class="footer-text">
-                &copy; 2024 Elessando de Abreu&reg;. Projeto Web Trier
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <div class="input-group">
+              <i class="bi bi-lock"></i>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Digite sua senha"
+                required
+              />
             </div>
+          </div>
+
+          <button type="submit" class="btn btn-login">
+            <i class="bi bi-box-arrow-in-right"></i> Entrar
+          </button>
+        </form>
+
+        <div class="footer-text">
+          &copy; 2024 Elessando de Abreu&reg;. Projeto Web Trier
         </div>
+      </div>
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/login.js"></script>
-</body>
+  </body>
 </html>
