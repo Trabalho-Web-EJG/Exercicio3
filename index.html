@@ -1,131 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizador de Tarefas</title>
-
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Icones do Bootstrap  -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <!-- Fontes do Google  -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" href="css/index.css" />
-  </head>
-  <body>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/index.css">
+    
+</head>
+<body>
     <!-- Container Principal -->
     <div class="main-container">
-      <header class="header">
-        <h1><i class="bi bi-check2-square"></i> Organizador de Tarefas</h1>
-        <p>Mantenha suas atividades organizadas e em dia</p>
-      </header>
+       
+        <header class="header">
+            <h1><i class="bi bi-check2-square"></i> Organizador de Tarefas</h1>
+            <p>Mantenha suas atividades organizadas e em dia</p>
+        </header>
 
-      <!-- Seção de Estatísticas -->
-      <section class="stats-section">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="stat-card total">
-              <div class="stat-number" id="totalTasks">0</div>
-              <div class="stat-label">Total</div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="stat-card pendentes">
-              <div class="stat-number" id="pendingTasks">0</div>
-              <div class="stat-label">Pendentes</div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="stat-card concluidas">
-              <div class="stat-number" id="completedTasks">0</div>
-              <div class="stat-label">Concluídas</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="controls-section">
-        <!--  Nova Tarefa -->
-        <div class="form-section">
-          <h3 class="form-title">
-            <i class="bi bi-plus-circle"></i>
-            Adicionar Nova Tarefa
-          </h3>
-          <form id="taskForm">
+        <!-- Seção de Estatísticas -->
+        <section class="stats-section">
             <div class="row">
-              <div class="col-md-8">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="taskInput"
-                  placeholder="Digite sua tarefa aqui..."
-                  required
-                />
-              </div>
-              <div class="col-md-4">
-                <input
-                  type="date"
-                  class="form-control"
-                  id="dateInput"
-                  required
-                />
-              </div>
+                <div class="col-md-4">
+                    <div class="stat-card total">
+                        <div class="stat-number" id="totalTasks">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card pendentes">
+                        <div class="stat-number" id="pendingTasks">0</div>
+                        <div class="stat-label">Pendentes</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card concluidas">
+                        <div class="stat-number" id="completedTasks">0</div>
+                        <div class="stat-label">Concluídas</div>
+                    </div>
+                </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-12">
-                <button type="submit" class="btn btn-primary">
-                  <i class="bi bi-plus"></i> Adicionar Tarefa
+        </section>
+
+        
+        <section class="controls-section">
+            <!--  Nova Tarefa -->
+            <div class="form-section">
+                <h3 class="form-title">
+                    <i class="bi bi-plus-circle"></i>
+                    Adicionar Nova Tarefa
+                </h3>
+                <form id="taskForm">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="taskInput" 
+                                placeholder="Digite sua tarefa aqui..." 
+                                required
+                            >
+                        </div>
+                        <div class="col-md-4">
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="dateInput" 
+                                required
+                            >
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-plus"></i> Adicionar Tarefa
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Filtragem -->
+            <div class="filters-section">
+                <h5>Filtrar tarefas:</h5>
+                <button class="btn filter-btn active" data-filter="all">
+                    <i class="bi bi-list"></i> Todas
                 </button>
-              </div>
+                <button class="btn filter-btn" data-filter="pending">
+                    <i class="bi bi-clock"></i> Pendentes
+                </button>
+                <button class="btn filter-btn" data-filter="completed">
+                    <i class="bi bi-check-circle"></i> Concluídas
+                </button>
             </div>
-          </form>
-        </div>
 
-        <!-- Filtragem -->
-        <div class="filters-section">
-          <h5>Filtrar tarefas:</h5>
-          <button class="btn filter-btn active" data-filter="all">
-            <i class="bi bi-list"></i> Todas
-          </button>
-          <button class="btn filter-btn" data-filter="pending">
-            <i class="bi bi-clock"></i> Pendentes
-          </button>
-          <button class="btn filter-btn" data-filter="completed">
-            <i class="bi bi-check-circle"></i> Concluídas
-          </button>
-        </div>
-
-        <!-- Listagem de totas as Tarefas -->
-        <div class="tasks-container">
-          <div id="tasksList"></div>
-          <div id="emptyState" class="empty-state" style="display: none">
-            <i class="bi bi-clipboard-x"></i>
-            <h3>Nenhuma tarefa encontrada</h3>
-            <p>Adicione uma nova tarefa para começar a se organizar!</p>
-          </div>
-        </div>
-      </section>
+            <!-- Listagem de totas as Tarefas -->
+            <div class="tasks-container">
+                <div id="tasksList"></div>
+                <div id="emptyState" class="empty-state" style="display: none;">
+                    <i class="bi bi-clipboard-x"></i>
+                    <h3>Nenhuma tarefa encontrada</h3>
+                    <p>Adicione uma nova tarefa para começar a se organizar!</p>
+                </div>
+            </div>
+        </section>
     </div>
 
+    
     <footer class="footer">
-      <div class="container">
-        <p>
-          &copy; 2025 Elessando de Abreu&reg;. Todos os direitos reservados.
-        </p>
-      </div>
+        <div class="container">
+            <p>&copy; 2025 Elessando de Abreu&reg;. Todos os direitos reservados.</p>
+        </div>
     </footer>
 
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="js/index.js"></script>
-  </body>
+</body>
 </html>
