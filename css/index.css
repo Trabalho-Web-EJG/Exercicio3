@@ -1,8 +1,5 @@
-/* === ESTILOS DA PÁGINA PRINCIPAL === */
-/* Projeto: Organizador de Tarefas Escolares */
-/* Desenvolvido por: Elessando de Abreu */
 
-/* === ESTILOS GLOBAIS === */
+
 * {
     margin: 0;
     padding: 0;
@@ -245,10 +242,10 @@ body {
 
 /* === RODAPÉ === */
 .footer {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #4facfe8a 0%, #00f1fe27 100%);
     color: white;
     text-align: center;
-    padding: 15px 0;
+    padding: 5px 0;
     margin-top: 20px;
 }
 
