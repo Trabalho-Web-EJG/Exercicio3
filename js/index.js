@@ -20,8 +20,8 @@ const totalTasksElement = document.getElementById("totalTasks");
 const pendingTasksElement = document.getElementById("pendingTasks");
 const completedTasksElement = document.getElementById("completedTasks");
 
-//Inicia o sistema quando a página carrega
 
+//Inicia o sistema quando a página carrega
 document.addEventListener("DOMContentLoaded", function () {
   loadTasks();
   setMinDate();
@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //Ativa modo escuro se estiver salvo
-
 function initializeDarkMode() {
   if (isDarkMode) {
     document.body.classList.add("dark-mode");
@@ -40,7 +39,6 @@ function initializeDarkMode() {
 }
 
 //Configura o Konami Code
-
 function setupKonamiCode() {
   document.addEventListener("keydown", function (event) {
     konamiSequence.push(event.code);
@@ -67,7 +65,6 @@ function setupKonamiCode() {
 }
 
 //Liga e desliga modo escuro
-
 function toggleDarkMode() {
   isDarkMode = !isDarkMode;
   document.body.classList.toggle("dark-mode", isDarkMode);
@@ -86,7 +83,6 @@ function toggleDarkMode() {
 }
 
 //Define data mínima como hoje
-
 function setMinDate() {
   const today = new Date().toISOString().split("T")[0];
   dateInput.min = today;
@@ -94,7 +90,6 @@ function setMinDate() {
 }
 
 //Configura todos os eventos
-
 function setupEvents() {
   taskForm.addEventListener("submit", handleSubmit);
 
@@ -106,7 +101,6 @@ function setupEvents() {
 }
 
 // Cria tarefas de exemplo
-
 function createSampleTasks() {
   if (tasks.length === 0) {
     const sampleTasks = [
@@ -134,7 +128,7 @@ function createSampleTasks() {
       {
         id: generateId(),
         title: "Entregar trabalho WEB - Matheus - Trier",
-        date: getDatePlusDays(4),
+        date: getDatePlusDays(0),
         completed: false,
         createdAt: new Date().toISOString(),
       },
@@ -155,7 +149,6 @@ function createSampleTasks() {
 }
 
 // Gera data futura
-
 function getDatePlusDays(days) {
   const date = new Date();
   date.setDate(date.getDate() + days);
@@ -163,13 +156,11 @@ function getDatePlusDays(days) {
 }
 
 //Gera ID único
-
 function generateId() {
   return Date.now().toString() + Math.random().toString(36).substr(2, 5);
 }
 
 //Processa novo formulário
-
 function handleSubmit(e) {
   e.preventDefault();
 
@@ -181,13 +172,6 @@ function handleSubmit(e) {
     return;
   }
 
-  // Verifica se a data não é antes de hoje
-  const today = new Date().toISOString().split("T")[0];
-
-  if (date < today) {
-    showAlert("A data deve ser hoje ou futura!", "warning");
-    return;
-  }
 
   // Evita a adição de tarefas duplicadas
   if (taskExists(title)) {
@@ -216,7 +200,6 @@ function handleSubmit(e) {
 }
 
 // Verifica se tarefa já existe
-
 function taskExists(title) {
   return tasks.some(
     (task) =>
@@ -225,7 +208,6 @@ function taskExists(title) {
 }
 
 // Mostra alertas
-
 function showAlert(message, type) {
   const existingAlert = document.querySelector(".alert");
   if (existingAlert) {
@@ -250,8 +232,7 @@ function showAlert(message, type) {
 }
 
 
- //Salva tarefas
- 
+//Salva tarefas
 function saveTasks() {
   try {
     localStorage.setItem("schoolTasks", JSON.stringify(tasks));
@@ -261,8 +242,7 @@ function saveTasks() {
 }
 
 
- //Carrega tarefas
- 
+//Carrega tarefas
 function loadTasks() {
   try {
     const savedTasks = localStorage.getItem("schoolTasks");
@@ -278,8 +258,7 @@ function loadTasks() {
 }
 
 
- //Mostra tarefas na tela
- 
+//Mostra tarefas na tela
 function renderTasks() {
   const filteredTasks = getFilteredTasks();
 
@@ -301,8 +280,7 @@ function renderTasks() {
 }
 
 
- //Filtra tarefas
- 
+//Filtra tarefas
 function getFilteredTasks() {
   switch (currentFilter) {
     case "pending":
@@ -315,8 +293,7 @@ function getFilteredTasks() {
 }
 
 
- //Cria HTML da tarefa
- 
+//Cria HTML da tarefa gerada
 function createTaskHTML(task) {
   const isUrgent = isTaskUrgent(task.date);
   const isNear = isTaskNear(task.date);
@@ -328,7 +305,7 @@ function createTaskHTML(task) {
     dateClass = "near";
   }
 
-  const formattedDate = formatDate(task.date);
+  const formattedDate = formatDate(task.date); // convertendo a data para padrao brasil
 
   return `
         <div class="task-card ${
@@ -364,8 +341,7 @@ function createTaskHTML(task) {
 
 
  // Verifica se é urgente
- 
-function isTaskUrgent(dateStr) {
+  function isTaskUrgent(dateStr) {
   const taskDate = new Date(dateStr);
   const today = new Date();
   const diffTime = taskDate - today;
@@ -375,7 +351,6 @@ function isTaskUrgent(dateStr) {
 
 
 // Verifica se está próxima
- 
 function isTaskNear(dateStr) {
   const taskDate = new Date(dateStr);
   const today = new Date();
@@ -386,7 +361,6 @@ function isTaskNear(dateStr) {
 
 
  // Formata a data
- 
 function formatDate(dateStr) {
   const date = new Date(dateStr + "T00:00:00");
   return date.toLocaleDateString("pt-BR");
@@ -394,7 +368,6 @@ function formatDate(dateStr) {
 
 
  // Marca/desmarca tarefa como concluída
- 
 function toggleTask(taskId) {
   const taskIndex = tasks.findIndex((task) => task.id === taskId);
 
@@ -413,8 +386,7 @@ function toggleTask(taskId) {
 }
 
 
- // Exclui uma tarefa
- 
+ // Excluir uma tarefa
 function deleteTask(taskId) {
   if (!confirm("Tem certeza que deseja excluir esta tarefa?")) {
     return;
@@ -430,7 +402,6 @@ function deleteTask(taskId) {
 
 
 // Define o filtro ativo
- 
 function setActiveFilter(filter) {
   currentFilter = filter;
 
@@ -446,7 +417,6 @@ function setActiveFilter(filter) {
 
 
  // Atualiza os contadores
- 
 function updateStats() {
   const total = tasks.length;
   const completed = tasks.filter((task) => task.completed).length;
